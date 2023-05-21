@@ -1,84 +1,82 @@
-// Load the JSON data
-fetch('bajaj_file.json')
-  .then(response => response.json())
-  .then(data => {
-    // Render the employee data
-    renderEmployees(data.employees);
+document.addEventListener("DOMContentLoaded", function() {
+  fetch('bajaj_file.json')
+    .then(response => response.json())
+    .then(data => renderData(data.employees))
+    .catch(error => console.log(error));
 
-    // Add event listeners for filtering and searching
-    document.getElementById('filterSelect').addEventListener('change', handleFilter);
-    document.getElementById('searchInput').addEventListener('input', handleSearch);
-  })
-  .catch(error => console.error(error));
+  function renderData(employees) {
+    const filterCheckboxes = document.querySelectorAll('.filterCheckbox');
+    const searchInput = document.getElementById('searchInput');
+    const resultsContainer = document.getElementById('results');
 
-// Render the employee data
-function renderEmployees(employees) {
-  const container = document.getElementById('employeeContainer');
-  container.innerHTML = '';
+    // Render all employees initially
+    renderEmployees(employees);
 
-  employees.forEach(employee => {
-    const card = createEmployeeCard(employee);
-    container.appendChild(card);
-  });
-}
+    // Filter employees based on skills selection
+    filterCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const selectedSkills = getSelectedSkills();
+        const filteredEmployees = filterEmployeesBySkills(employees, selectedSkills);
+        renderEmployees(filteredEmployees);
+      });
+    });
 
-// Create an employee card element
-function createEmployeeCard(employee) {
-  const card = document.createElement('div');
-  card.classList.add('employeeCard');
+    // Filter employees based on name search
+    searchInput.addEventListener('keyup', function() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filteredEmployees = filterEmployeesByName(employees, searchTerm);
+      renderEmployees(filteredEmployees);
+    });
 
-  const name = document.createElement('h2');
-  name.textContent = employee.name || 'Unknown';
-  card.appendChild(name);
-
-  if (employee.designation) {
-    const designation = document.createElement('p');
-    designation.textContent = 'Designation: ' + employee.designation;
-    card.appendChild(designation);
-  }
-
-  if (employee.skills.length > 0) {
-    const skills = document.createElement('p');
-    skills.textContent = 'Skills: ' + employee.skills.join(', ');
-    card.appendChild(skills);
-  }
-
-  return card;
-}
-
-// Filter the employee data based on the selected option
-function handleFilter() {
-  const filterValue = this.value.toLowerCase();
-  const cards = document.getElementsByClassName('employeeCard');
-
-  Array.from(cards).forEach(card => {
-    const designation = card.querySelector('p:nth-of-type(1)');
-    const skills = card.querySelector('p:nth-of-type(2)');
-
-    if (filterValue === '') {
-      card.classList.remove('filtered');
-    } else if (designation && designation.textContent.toLowerCase().includes(filterValue)) {
-      card.classList.remove('filtered');
-    } else if (skills && skills.textContent.toLowerCase().includes(filterValue)) {
-      card.classList.remove('filtered');
-    } else {
-      card.classList.add('filtered');
+    function getSelectedSkills() {
+      const selectedSkills = [];
+      filterCheckboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          selectedSkills.push(checkbox.value);
+        }
+      });
+      return selectedSkills;
     }
-  });
-}
 
-// Search for employees based on the entered text
-function handleSearch() {
-  const searchValue = this.value.toLowerCase();
-  const cards = document.getElementsByClassName('employeeCard');
+    function renderEmployees(employees) {
+      resultsContainer.innerHTML = '';
 
-  Array.from(cards).forEach(card => {
-    const name = card.querySelector('h2');
-
-    if (name.textContent.toLowerCase().includes(searchValue)) {
-      card.classList.remove('filtered');
-    } else {
-      card.classList.add('filtered');
+      if (employees.length === 0) {
+        resultsContainer.innerHTML = '<p>No matching employees found</p>';
+      } else {
+        employees.forEach(employee => {
+          const employeeCard = createEmployeeCard(employee);
+          resultsContainer.appendChild(employeeCard);
+        });
+      }
     }
-  });
-}
+
+    function createEmployeeCard(employee) {
+      const employeeCard = document.createElement('div');
+      employeeCard.classList.add('employee-card');
+
+      const nameElement = document.createElement('h3');
+      nameElement.textContent = employee.name;
+      employeeCard.appendChild(nameElement);
+
+      const skillsElement = document.createElement('p');
+      skillsElement.classList.add('skills');
+      skillsElement.textContent = 'Skills: ' + employee.skills.join(', ');
+      employeeCard.appendChild(skillsElement);
+
+      return employeeCard;
+    }
+
+    function filterEmployeesBySkills(employees, selectedSkills) {
+      return employees.filter(employee => {
+        return selectedSkills.every(skill => employee.skills.includes(skill));
+      });
+    }
+
+    function filterEmployeesByName(employees, searchTerm) {
+      return employees.filter(employee => {
+        return employee.name.toLowerCase().includes(searchTerm);
+      });
+    }
+  }
+});

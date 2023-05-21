@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Employee Data</title>
+  <title>JSON Data Rendering</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>Employee Data</h1>
-  <input type="text" id="searchInput" placeholder="Search by name...">
-  <select id="filterSelect">
-    <option value="">Filter by designation/skills</option>
-    <option value="Senior Developer">Senior Developer</option>
-    <option value="QA Engineer">QA Engineer</option>
-    <option value="Project Manager">Project Manager</option>
-    <option value="JavaScript">JavaScript</option>
-    <option value="Python">Python</option>
-    <option value="Java">Java</option>
-    <option value="HTML">HTML</option>
-    <option value="CSS">CSS</option>
-    <option value="Photoshop">Photoshop</option>
-    <option value="Manual Testing">Manual Testing</option>
-    <option value="SQL">SQL</option>
-  </select>
-  <div id="employeeContainer"></div>
+  <h1>JSON Data Rendering</h1>
+
+  <div id="filterContainer">
+    <label>Filter by Skills:</label>
+    <label><input type="checkbox" class="filterCheckbox" value="SQL">SQL</label>
+    <label><input type="checkbox" class="filterCheckbox" value="JavaScript">JavaScript</label>
+    <label><input type="checkbox" class="filterCheckbox" value="Python">Python</label>
+    <label><input type="checkbox" class="filterCheckbox" value="HTML">HTML</label>
+    <label><input type="checkbox" class="filterCheckbox" value="CSS">CSS</label>
+    <label><input type="checkbox" class="filterCheckbox" value="Photoshop">Photoshop</label>
+    <label><input type="checkbox" class="filterCheckbox" value="Manual Testing">Manual Testing</label>
+    <label><input type="checkbox" class="filterCheckbox" value="Java">Java</label>
+  </div>
+
+  <input type="text" id="searchInput" placeholder="Search by name">
+
+  <div id="results"></div>
+
   <script src="script.js"></script>
 </body>
 </html>

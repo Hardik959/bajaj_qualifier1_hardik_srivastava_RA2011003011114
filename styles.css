@@ -2,6 +2,7 @@ body {
   font-family: Arial, sans-serif;
   padding: 20px;
   background-image: url('4321941.jpeg');
+  
 }
 
 h1 {
@@ -17,13 +18,18 @@ select {
   border-radius: 4px;
 }
 
-#employeeContainer {
+#filterContainer {
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+#results {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.employeeCard {
+.employee-card {
   width: 300px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -34,22 +40,22 @@ select {
   transition: box-shadow 0.3s ease;
 }
 
-.employeeCard:hover {
+.employee-card:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.employeeCard h2 {
+.employee-card h3 {
   margin: 0;
   font-size: 20px;
   color: #333;
 }
 
-.employeeCard p {
+.employee-card p.skills {
   margin: 5px 0;
   color: #666;
 }
 
-.employeeCard ul {
+.employee-card ul {
   margin: 0;
   padding-left: 20px;
   color: #666;
