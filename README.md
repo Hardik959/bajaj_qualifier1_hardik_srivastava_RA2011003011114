@@ -1,6 +1,6 @@
 # bajaj_qualifier1
  
-### DEPLOYED WEBSITE LINK - https://main--cheerful-rabanadas-f27df9.netlify.app/
+### DEPLOYED WEBSITE LINK - https://stellular-palmier-b9c35c.netlify.app/
  
 ### WEBSITE - 
 
