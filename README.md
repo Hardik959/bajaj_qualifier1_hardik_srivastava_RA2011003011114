@@ -10,7 +10,7 @@
 
 ![image](https://github.com/Hardik959/bajaj_qualifier1_hardik_srivastava_RA2011003011114/assets/72294605/799bcf22-42f3-4cfe-aa89-e5af75a11847)
 
-![image](https://github.com/Hardik959/bajaj_qualifier1_hardik_srivastava_RA2011003011114/assets/72294605/1ffbf4f6-bcc6-4603-82a0-cf8307291061)
+![image](https://github.com/Hardik959/bajaj_qualifier1_hardik_srivastava_RA2011003011114/assets/72294605/a04f95bd-6524-47e0-827d-2806f93b3cb1)
 
 ### USING SEARCH -
 
